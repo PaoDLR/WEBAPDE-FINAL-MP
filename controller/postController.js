@@ -5,20 +5,22 @@ function PostModule(server){
   
     server.get('/', function(req, resp){
       
-        var passDataLogin;
-
-        loginModel.find({}, function(err, login){
-           passDataLogin = login; 
-        });
+        var passDataLogin, passDataPost;
         
         postModel.allPosts(function(list){
-            passDataLogin = {list:list}
+            console.log(list + "Post data-----------------------------------");
+            passDataPost = list;
+            console.log(passDataPost + "here here here here");
         });
-
-        postModel.find({}, function(err, post){
-           resp.render('./pages/index', { postData: post, loginData: passDataLogin });
-        });
-
+        
+        loginModel.allUsers(function(list){
+            console.log(list + "user data----------------------------------------");
+            passDataLogin = list;
+        })
+        
+        if(passDataLogin != undefined && passDataPost != undefined)
+            resp.render('./pages/index', { postData: passDataPost, loginData: passDataLogin });
+        
     });
     
 }

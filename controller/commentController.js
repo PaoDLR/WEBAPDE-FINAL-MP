@@ -2,6 +2,6 @@ const commentModel = require('../model/loginModel');
 
 function CommentModule(server){
     
-    server.
-    
 }
+
+module.exports.Activate = CommentModule;

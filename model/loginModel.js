@@ -32,7 +32,7 @@ function checkLogin(username, password, callback){
 
 module.exports.checkLogin = checkLogin;
 
-function function addLogin(username, password, description, callback){
+function addLogin(username, password, description, callback){
    //Creating a new instance can be made this way.
   var hpass = password;
   var hashedPass = crypto.createHash('md5').update(hpass).digest('hex');
@@ -54,3 +54,12 @@ function function addLogin(username, password, description, callback){
 }
 
 module.exports.addLogin = addLogin;
+
+function allUsers(callback){
+    loginModel.find({}, function(err, login){
+        if(err) return console.error(err);
+        callback(login);
+    });
+}
+
+module.exports.allUsers = allUsers;
