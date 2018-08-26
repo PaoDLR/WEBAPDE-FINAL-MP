@@ -38,3 +38,18 @@ function addComment(username, content, parentPost, callback){
 }
 
 module.exports.addComment = addComment;
+
+function editComment(username, editedComment, callback){
+    const editQuery = { username };
+    
+    commentModel.findOne(editQuery, function (err, comment){
+        comment.content = editedComment;
+        
+        comment.save(function(err, result){
+            if (err) return console.error(err);
+            callback(result);
+        });  
+    });
+}
+
+module.exports.editComment = editComment;
