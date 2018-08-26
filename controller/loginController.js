@@ -12,8 +12,16 @@ function LoginModule(server){
      server.post('/signup', function(req, resp){    
          
        loginModel.addLogin(req.body.user, req.body.pass, req.body.desc, function(){
-          //This should render the home page with the data of the post generated.
-          resp.redirect('./index'); 
+          var passDataLogin, passDataPost;
+
+                loginModel.allUsers(function(list){
+                    passDataLogin = list;
+                });
+
+                postModel.allPosts(function(list){
+                    passDataPost = list;
+                    resp.render('./pages/index', { postData: passDataPost, loginData: passDataLogin });
+                });
        });
     });
 
@@ -23,8 +31,17 @@ function LoginModule(server){
         loginModel.checkLogin(req.body.user, req.body.pass, function(result){
           
           if(result){
-              //This should advance and go to home page with the posts generated.
-              resp.redirect('./index');
+              
+              var passDataLogin, passDataPost;
+
+                loginModel.allUsers(function(list){
+                    passDataLogin = list;
+                });
+
+                postModel.allPosts(function(list){
+                    passDataPost = list;
+                    resp.render('./pages/index', { postData: passDataPost, loginData: passDataLogin });
+                });
           }
           else{
               //This should go back to sign-in cause user failed to login successfully.
