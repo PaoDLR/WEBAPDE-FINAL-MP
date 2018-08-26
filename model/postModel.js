@@ -21,3 +21,23 @@ function allPosts(callback){
 }
 
 module.exports.allPosts = allPosts;
+
+function addPost(username, title, description, content, likes, callback){
+    //Creating a new instance can be made this way.
+    const postInstance = postModel({
+        user: username,
+        title: title,
+        desc: description,
+        content: content,
+        likes: likes
+    });
+
+    //to save this into the database, call the instance's save function.
+    //it will have a call-back to check if it worked.
+    postInstance.save(function (err, fluffy) {
+        if(err) return console.error(err);
+        callback();
+    });
+}
+
+module.exports.addPost = addPost;
