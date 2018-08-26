@@ -69,6 +69,26 @@ function PostModule(server){
     
     });
     
+    server.get('/profile', function(req, resp){
+    
+        var passDataComment, passDataPost, passDataLogin;
+
+        postModel.allPosts(function(list){
+            passDataPost = list;
+        });
+
+        commentModel.allComments(function(list){
+            passDataComment = list;
+        });
+        
+        loginModel.findUser(req.query.user, function(user){
+            passDataLogin = user;
+            
+            resp.render('./pages/profile', { data: passDataLogin, commentData: passDataComment, postData: passDataPost });
+        });
+        
+    });
+    
 }
 
 module.exports.Activate = PostModule;
