@@ -16,10 +16,10 @@ function PostModule(server){
         loginModel.allUsers(function(list){
             console.log(list + "user data----------------------------------------");
             passDataLogin = list;
-        })
-        
-        if(passDataLogin != undefined && passDataPost != undefined)
+            
+            if(passDataLogin != undefined && passDataPost != undefined)
             resp.render('./pages/index', { postData: passDataPost, loginData: passDataLogin });
+        });
         
     });
     
