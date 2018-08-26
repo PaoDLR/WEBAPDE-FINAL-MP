@@ -69,3 +69,14 @@ function allUsers(callback){
 }
 
 module.exports.allUsers = allUsers;
+
+function findUser(username, callback){
+    const findQuery = { user: username }
+
+    loginModel.findOne(findQuery, function(err, login){
+        console.log("found user");
+        callback(login);
+    });
+}
+
+module.exports.findUser = findUser;

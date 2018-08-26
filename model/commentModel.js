@@ -13,3 +13,28 @@ const commentSchema = new mongoose.Schema({
 
 const commentModel = mongoose.model('comment', commentSchema);
 
+function allComments(callback){
+    commentModel.find({}, function(err, comment){
+        if(err) return console.error(err);
+        callback(comment);
+    });
+}
+
+module.exports.allComments = allComments;
+
+function addComment(username, content, parentPost, callback){
+    const commentInstance = commentModel({
+        user: username,
+        content: content,
+        parentPost: parentPost
+    });
+
+    //to save this into the database, call the instance's save function.
+    //it will have a call-back to check if it worked.
+    commentInstance.save(function (err, fluffy) {
+        if(err) return console.error(err);
+        callback();
+    });
+}
+
+module.exports.addComment = addComment;
