@@ -5,6 +5,8 @@
 
 const mongoose = require('./connectionBase').connection;
 
+const crypto = require('crypto');
+
 const loginSchema = new mongoose.Schema({
   user: { type: String },
   pass: { type: String },
@@ -21,12 +23,15 @@ function checkLogin(username, password, callback){
   var hashedPass = crypto.createHash('md5').update(hpass).digest('hex');      
   
   const searchQuery = { username, hashedPass };
+    console.log(username + " <--------- Username Data ");
+    console.log(hashedPass + " <--------- HPassword Data ");
 
   //The model can be found via a search query and the information is found
   //in the login function. Access the information like a JSon array.
   loginModel.findOne(searchQuery, function (err, login) {
     if(err) return console.error(err);
-    callback(login != undefined && login._id != null)    
+    callback(login != undefined && login._id != null)
+      console.log(login + " <--------- Login Data ");
   });
 }
 
@@ -59,6 +64,7 @@ function allUsers(callback){
     loginModel.find({}, function(err, login){
         if(err) return console.error(err);
         callback(login);
+        console.log(login + " <--------- Login Data ");
     });
 }
 
