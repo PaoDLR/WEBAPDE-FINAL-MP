@@ -1,0 +1,122 @@
+<html>
+
+    <head>
+        <title>Hot Dawg Forum</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+        
+        <link rel="stylesheet" href="./common/post-style.css" />
+    </head>
+
+    <% var fDP = "default.png"; %>
+
+    <% for(var i = 0; i < loginData.length; i++){ %>
+        <% if(loginData[i].user == data.user){ %>
+            <% fDP = loginData[i].dp %>
+        <% } %>
+    <% } %>
+    
+    <body class="background">      
+        <% include ./header.ejs %>
+        <br>
+        <% console.log("hereeee " + commentData.length) %>
+        <div id="info" class="border">
+            <div id="avatarDiv">
+                <img src="./imgs/<%=fDP%>" id="avatarImg" alt="avatar">
+            </div>
+            
+            <div>
+                <div class="details font">
+                    <form action="profile" method="get">
+                        
+                        <input class="prflName" name="user" type="submit" value="<%=data.user%>"> 07/12/2018 1:02PM
+                        
+                    </form>
+                </div>
+                <div class="title font">
+                    <span name="title"><%= data.title %></span>
+                </div>
+            </div>
+            <div class="vote">
+                <div>
+                    <div>
+                    <button class="voteBtn"><img src="./imgs/upvote.png" class="voteImg"></button>
+                    </div>
+                    <div>    
+                    <button class="voteBtn"><img src ="./imgs/downvote.png" class="voteImg"></button>
+                    </div>
+                </div>    
+                <span class="voteCount font"><%= data.likes %></span>
+            </div>
+        </div>
+        <br>
+        <div class="contentContainer border font">
+            <div class="content">
+                <%= data.desc %><br><br>
+                  
+                <%= data.content %>
+            </div>
+        </div>
+        <br>
+        <div id="comments" class="border font">
+            <div class="myComment">
+                <form action = "post" method="get">
+                    <textarea name="comment" class="inputComment" cols="30" rows="10" placeholder="Enter comment here"></textarea>
+                    
+                    <input name="title" type="submit" value="<%= data.title %>"> <--- press this to submit
+                </form>
+            </div>
+                
+            <% for(var i=0;i<commentData.length;i++){ %>
+                <% if(commentData[i].parentPost == data.title){%>
+                    <div class="CommentContainer">
+                        <div class="commentDetails">
+                            <div class ="commentNameTime">
+                                
+                                <form action="profile" method="get">
+                        
+                                    <input class="cmntName" name="user" type="submit" value="<%=commentData[i].user%>"> 07/12/2018 2:03PM
+                        
+                                </form>
+                                
+                            </div>
+                            <div class ="commentProper"><%= commentData[i].content %> </div>
+                            <div class="editBtn" class="replyContainer">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2"> 
+                                    <img src="./imgs/edit.png" class="replyImg font"> Edit
+                                </button>
+                                <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <form action="edit-comment" method="get">
+                                        <h5 name="comment" class="modal-title" id="exampleModalCenterTitle"><%= commentData[i].content %></h5>
+                                        <% console.log(commentData[i].content + "this is the conten of i") %>
+                                      </div>
+                                      <div class="modal-body">
+                                        <textarea name="editComment" class="inputReply" cols="30" rows="10" placeholder="Edit comment here"></textarea>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <button type="button" class="btn btnDel"> 
+                                    <img src="./imgs/waste.png" class="replyImg font"> Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            <% } %>
+                
+            </div>
+        </div>
+    </body>
+    
+</html>

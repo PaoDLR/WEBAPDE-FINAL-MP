@@ -1,0 +1,64 @@
+<html>
+
+    <head>
+        <title>Hot Dawg Forum</title>
+        <link rel="stylesheet" href="./common/index.css" />
+        <link rel="stylesheet" href="./common/indexPosts.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        
+        <script>
+        function topFunction() 
+        {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+        </script>
+    </head>
+    
+    <body class="background">
+        <% include ./header.ejs %>
+        <div class="container">
+            <% for(var i=0;i<postData.length;i++){ %>
+                    <%- include('./indexPosts', {
+                        title: postData[i].title,
+                        desc: postData[i].desc,
+                        likes: postData[i].likes,
+                        user: postData[i].user
+                    }); %>
+            <% } %>
+
+        </div>
+        <div class="footer">
+            <div class="w3-container">
+                <button onclick="document.getElementById('id01').style.display='block'" class="createButton">Create Post</button>
+                <div id="id01" class="w3-modal">
+                    <div class="w3-modal-content">
+                        <div class="w3-container">
+                            <form action="create-post" method="post">
+                                <div><input name="title" class="createTitle" type="text" placeholder="Title"/>
+                                    <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                                </div>
+                                <div>
+                                    <input name="desc" class="createDesc" type="text" placeholder="Description"/>
+                                </div>
+                                <div>
+                                    <input name="content" class="createBody" type="text" placeholder="What's happening today?"/>
+                                </div>
+                                <div>
+                                    <form action="create-post" method="post">
+                                    <button id="createPublish" onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-bottomright" type="submit">Publish</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--            <button id="sitemap" type="submit"> <a href="site-map.html" id="sitemapA">Site-map</a> </button>-->
+<!--            <button class="createPost">Create Post</button>       -->
+            <button id="backToTop" type="submit" onclick="topFunction()" title="Go to top">Back To Top </button>
+        </div>
+        
+    </body>
+
+</html>     

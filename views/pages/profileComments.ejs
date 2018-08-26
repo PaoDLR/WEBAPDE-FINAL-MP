@@ -1,0 +1,21 @@
+<div class="userPost">
+    <div class="usernameCommented">
+        <form action = "post" method="get">
+            <%= user %> commented on '
+            <input class="extLink" name="title" type="submit" value="<%= parentPost %>"/>
+            '
+        </form>
+    </div>
+    <div class="actualComment">
+        <%= content %>
+    </div>
+    <div class="commentDate">
+        June 29, 2018 6:31PM
+    </div>
+    <div class="editComment">
+        <img class="dpComments" src="./imgs/edit.png"> Edit
+    </div>
+    <div class="deleteComment">
+        <img class="dpComments" src="./imgs/waste.png"> Delete
+    </div>
+</div>
