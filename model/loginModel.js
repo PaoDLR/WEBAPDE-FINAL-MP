@@ -22,7 +22,7 @@ function checkLogin(username, password, callback){
   var hpass = password;
   var hashedPass = crypto.createHash('md5').update(hpass).digest('hex');      
   
-  const searchQuery = { username, hashedPass };
+  const searchQuery = { user: username, pass: hashedPass };
     console.log(username + " <--------- Username Data ");
     console.log(hashedPass + " <--------- HPassword Data ");
 
@@ -30,8 +30,8 @@ function checkLogin(username, password, callback){
   //in the login function. Access the information like a JSon array.
   loginModel.findOne(searchQuery, function (err, login) {
     if(err) return console.error(err);
-    callback(login != undefined && login._id != null)
-      console.log(login + " <--------- Login Data ");
+    callback(login != undefined && login._id != null);
+    console.log(login + " <--------- Login Data ");
   });
 }
 
