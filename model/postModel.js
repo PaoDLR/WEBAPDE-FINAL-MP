@@ -51,4 +51,15 @@ function findPost(title, callback){
     });
 }
 
+function findEditPost(username, title, description, content, callback){
+    
+    const findQuery = {title: title, desc: description, content: content}
+    
+    postModel.findOne(findQuery, function(err, post){
+        console.log("Found post to edit");
+        callback(post);
+    })
+    
+}
+
 module.exports.findPost = findPost;
