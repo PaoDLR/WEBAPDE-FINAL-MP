@@ -51,7 +51,7 @@ function findPost(title, callback){
     });
 }
 
-function findEditPost(username, title, description, content, callback){
+function findEDPost(username, title, description, content, callback){
     
     const findQuery = {title: title, desc: description, content: content}
     
@@ -60,6 +60,24 @@ function findEditPost(username, title, description, content, callback){
         callback(post);
     })
     
+}
+
+function editPost(title, description, content, callback){
+    
+    /* 
+    
+    Insert logic here.
+    
+    */
+}
+
+function deletePost(title, description, content, callback){
+    
+    /*
+    
+    Insert logic here.
+    
+    */
 }
 
 module.exports.findPost = findPost;

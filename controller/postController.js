@@ -89,6 +89,17 @@ function PostModule(server){
         
     });
     
+    server.get('/editedPost', function(req,resp){
+       var passDataPost
+       
+       postModel.findEDPost(req.query.user, req.query.title, req.query.description, req.query.content, function(post){
+           passDataPost = post;
+           
+           resp.redirect('./profile', {postData: passDataPost});
+       })
+       
+    });
+    
 }
 
 module.exports.Activate = PostModule;
