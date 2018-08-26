@@ -1,6 +1,6 @@
 const loginModel = require('../model/loginModel');
 
-function moduleLogin(server){
+function LoginModule(server){
 
 //Leads you to the sign-in page
 server.get('/signin', function(req, resp){
