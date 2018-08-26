@@ -41,3 +41,14 @@ function addPost(username, title, description, content, likes, callback){
 }
 
 module.exports.addPost = addPost;
+
+function findPost(title, callback){
+    const findQuery = { title: title }
+        
+    postModel.findOne(findQuery, function (err, post) {
+        console.log("found post");
+        callback(post);
+    });
+}
+
+module.exports.findPost = findPost;

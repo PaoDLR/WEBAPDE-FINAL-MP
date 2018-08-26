@@ -20,6 +20,8 @@ function allComments(callback){
     });
 }
 
+module.exports.allComments = allComments;
+
 function addComment(username, content, parentPost, callback){
     const commentInstance = commentModel({
         user: username,

@@ -43,7 +43,7 @@ function PostModule(server){
     
     server.get('/post', function(req, resp){
       
-        var passDataLogin, passDataComment;
+        var passDataLogin, passDataComment, passDataPost;
 
         loginModel.allUsers(function(list){
             passDataLogin = list;
@@ -57,16 +57,15 @@ function PostModule(server){
             
         }
 
-        commentModel.find({}, function (err, comment){
-            passDataComment = comment;
+        commentModel.allComments(function(list){
+            passDataComment = list;
         });
-
-        const findQuery = { title: req.query.title }
-
-        postModel.findOne(findQuery, function (err, post) {
-            console.log("found");
-            resp.render('./pages/post', { data:post, commentData: passDataComment, loginData: passDataLogin });
-        });
+        
+        postModel.findPost(req.query.title, function(post){
+            passDataPost = post;
+            
+            resp.render('./pages/post', { data: passDataPost, commentData: passDataComment, loginData: passDataLogin });
+        });    
     
     });
     
