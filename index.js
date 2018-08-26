@@ -19,7 +19,7 @@ server.set('view engine', 'ejs');
 server.use(express.static(__dirname + '/public'));
 
 //Insert other controllers here
-const controllers = ['login'];
+const controllers = ['login','post','comment'];
 
 for(var i = 0; i < controllers.length; i++){
   const mdl = require('./controller/'+ controllers[i] + 'Controller');
