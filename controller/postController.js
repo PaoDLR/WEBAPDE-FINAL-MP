@@ -11,7 +11,9 @@ function PostModule(server){
            passDataLogin = login; 
         });
         
-        passDataLogin = postModel.allPosts();
+        postModel.allPosts(function(list){
+            passDataLogin = {list:list}
+        });
 
         postModel.find({}, function(err, post){
            resp.render('./pages/index', { postData: post, loginData: passDataLogin });
