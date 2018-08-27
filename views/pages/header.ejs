@@ -1,8 +1,14 @@
 <div class="header">
     <a href="/"><img class="headerLogo" src="./imgs/hdlogo.png"> Hot Dawgs</a>
+    <% if(currentUser != undefined) {%>
     <a href="profile?user=<%= currentUser %>">My Profile</a>
+    <% } %>
     <input name="search" type="text" placeholder="Search"/>
     <a id="logout" href="/signin">
+        <% if(currentUser != undefined) {%>
         Log Out
+        <% }else{ %>
+        Log In
+        <% } %>
     </a>
 </div>

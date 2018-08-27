@@ -44,13 +44,13 @@
             <div class="vote">
                 <div>
                     <div>
-                    <button class="voteBtn"><img src="./imgs/upvote.png" class="voteImg"></button>
+                    <form action="upvote" class="voteBtn" method="post"><img src="./imgs/upvote.png" class="voteImg"></form>
                     </div>
                     <div>    
-                    <button class="voteBtn"><img src ="./imgs/downvote.png" class="voteImg"></button>
+                    <form action="downvote" class="voteBtn" method="post"><img src ="./imgs/downvote.png" class="voteImg"></form>
                     </div>
                 </div>    
-                <span class="voteCount font"><%= data.likes %></span>
+                <span name="likes" class="voteCount font"><%= data.likes %></span>
             </div>
         </div>
         <br>
@@ -64,7 +64,7 @@
         <br>
         <div id="comments" class="border font">
             <div class="myComment">
-                <form action = "post" method="get">
+                <form action="post" method="get">
                     <textarea name="comment" class="inputComment" cols="30" rows="10" placeholder="Enter comment here"></textarea>
                     
                     <input name="title" type="submit" value="<%= data.title %>"> <--- press this to submit
@@ -78,17 +78,14 @@
                             <div class ="commentNameTime">
                                 
                                 <form action="profile" method="get">
-                        
                                     <input class="cmntName" name="user" type="submit" value="<%=commentData[i].user%>"> 07/12/2018 2:03PM
-                        
                                 </form>
-                                
                             </div>
                             <div class ="commentProper"><%= commentData[i].content %> </div>
                             <div class="editBtn" class="replyContainer">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2"> 
+                                <form type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2"> 
                                     <img src="./imgs/edit.png" class="replyImg font"> Edit
-                                </button>
+                                </form>
                                 <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                   <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
@@ -108,9 +105,9 @@
                                     </div>
                                   </div>
                                 </div>
-                                <button type="button" class="btn btnDel"> 
+                                <form action="delete-comment" method="get" class="btn btnDel"> 
                                     <img src="./imgs/waste.png" class="replyImg font"> Delete
-                                </button>
+                                </form>
                             </div>
                         </div>
                     </div>

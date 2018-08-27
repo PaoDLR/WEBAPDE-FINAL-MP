@@ -35,7 +35,11 @@
         </div>
         <div class="footer">
             <div class="w3-container">
+                <% if(loggedIn != undefined) {%>
                 <button onclick="document.getElementById('id01').style.display='block'" class="createButton">Create Post</button>
+                <% }else{ %>
+                <button class="createButton"><a href="/signin">Create Post</a></button>
+                <% } %>
                 <div id="id01" class="w3-modal">
                     <div class="w3-modal-content">
                         <div class="w3-container">

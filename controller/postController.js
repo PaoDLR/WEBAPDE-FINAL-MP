@@ -157,7 +157,27 @@ function PostModule(server){
                resp.redirect('./profile', {postData: passDataPost, loginData: passDataLogin, commentData: passDataComment});
            });
 
-        });   
+        }); 
+    
+    server.get('/upvote', function(req,resp){
+      var passDataLikes;
+        console.log("hellooooooooooooo")
+        postModel.upvotePost(req.query.user, req.query.title, req.query.likes, function(post){
+                passDataLikes = likes;
+                
+                resp.render('.pages/post', {likesData: passDataLikes});
+        });
+    });
+    
+    server.get('/downvote', function(req,resp){
+      var passDataLikes;
+        
+        postModel.downvotePost(req.query.user, req.query.title, req.query.likes, function(post){
+                passDataLikes = likes;
+                
+                resp.render('.pages/post', {likesData: passDataLikes});
+             });
+    });
 }
 
 module.exports.Activate = PostModule;

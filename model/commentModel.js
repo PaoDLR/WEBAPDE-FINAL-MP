@@ -53,3 +53,20 @@ function editComment(username, editedComment, callback){
 }
 
 module.exports.editComment = editComment;
+
+function deleteComment(username, deletedComment, callback){
+    const deleteQuery = { username };
+    
+    console.log(" pls pls pls pls pls ");
+    
+    commentModel.deleteComment(deleteQuery, function (err, comment){
+        comment.content = deleteComment;
+        
+        comment.delete(function(err, result){
+            if(err) return console.error(err);
+            callback(result);
+        });
+    });
+}
+
+module.exports.deleteComment = deleteComment;
