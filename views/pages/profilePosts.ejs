@@ -10,6 +10,7 @@
     <div class="commentsPart">
 <!--        <img class="dpComments" src="comment.png"> 3 Comments-->
     </div>
+    <% if(loggedIn != undefined && loggedIn == user){ %>
     <div class="editPart">
 <!--
         <form action="editPost" method="get">
@@ -46,9 +47,15 @@
             <button class ="trialDHover" type="submit">Delete <img class="dpComments" src="./imgs/waste.png"></button>
         </form>
     </div>
+    <% } %>
+<!--
     <div class="votePart">
+        
         <div>
-            <img class="smallUp" src="./imgs/upvote.png">
+            <form action="upvote" class="voteBtn" method="post">
+                <input type="hidden" name="title" value="<%= title %>">
+                <button type="submit"><img class="smallUp" src="./imgs/upvote.png"></button>
+            </form>
         </div>
         <div>
             <img class="smallDown" src="./imgs/downvote.png">
@@ -57,6 +64,7 @@
             <%= likes %>
         </div>
     </div>
+-->
     <div class="dateTime">
         July 9, 2018 12:47PM
     </div>

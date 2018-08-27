@@ -2,7 +2,7 @@
     <div class="usernameCommented">
         <form action = "post" method="get">
             <%= user %> commented on '
-            <input class="extLink" name="title" type="submit" value="<%= parentPost %>"/>
+            <input class="extLink" name="title" type="submit" value="<%=parentPost%>"/>
             '
         </form>
     </div>
@@ -12,10 +12,12 @@
     <div class="commentDate">
         June 29, 2018 6:31PM
     </div>
+    <% if(loggedIn != undefined && loggedIn == user){ %>
     <div class="editComment">
         <img class="dpComments" src="./imgs/edit.png"> Edit
     </div>
     <div class="deleteComment">
         <img class="dpComments" src="./imgs/waste.png"> Delete
     </div>
+    <% } %>
 </div>
