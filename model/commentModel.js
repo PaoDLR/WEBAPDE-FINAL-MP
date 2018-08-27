@@ -54,19 +54,47 @@ function editComment(username, editedComment, callback){
 
 module.exports.editComment = editComment;
 
-function deleteComment(username, deletedComment, callback){
-    const deleteQuery = { username };
-    
-    console.log(" pls pls pls pls pls ");
-    
-    commentModel.deleteComment(deleteQuery, function (err, comment){
-        comment.content = deleteComment;
-        
-        comment.delete(function(err, result){
-            if(err) return console.error(err);
-            callback(result);
-        });
+//function deleteComment(username, deletedComment, callback){
+//    const deleteQuery = { username };
+//    
+//    console.log(" pls pls pls pls pls ");
+//    
+//    commentModel.deleteComment(deleteQuery, function (err, comment){
+//        comment.content = deleteComment;
+//        
+//        comment.delete(function(err, result){
+//            if(err) return console.error(err);
+//            callback(result);
+//        });
+//    });
+//}
+
+function findCommentbyID(id, callback){
+    const findQuery = { _id: id }
+        console.log(id + " <---- found comment by ID in commentModel");
+    commentModel.findOne(findQuery, function (err, comment) {
+        console.log(comment + " <---- found post by ID");
+        callback(comment);
     });
+}
+
+module.exports.findCommentbyID = findCommentbyID;
+
+function deleteComment(id, callback){
+
+    commentModel.deleteOne({_id: id}, function(err){
+        if(!err)
+            console.log("deleted -------------------------");
+        else
+            console.log("error ---------------------------");
+        
+    });
+    
+    
+//    commentModel.find({_id: id}.remove(callback));
+    
+//    commentModel.deleteOne({_id: id}, function(err){
+//        });
 }
 
 module.exports.deleteComment = deleteComment;
