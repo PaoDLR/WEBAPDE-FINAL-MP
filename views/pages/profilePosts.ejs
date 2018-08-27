@@ -11,10 +11,14 @@
 <!--        <img class="dpComments" src="comment.png"> 3 Comments-->
     </div>
     <div class="editPart">
-        <img class="dpComments" src="./imgs/edit.png"> Edit
+        <form action="editPost" method="get">
+         <input class ="trialEHover" type="submit" value="Edit"><img class="dpComments" src="./imgs/edit.png">
+        </form>
     </div>
     <div class="deletePart">
-        <img class="dpComments" src="./imgs/waste.png"> Delete
+        <form action="deletePost" method="get">
+        <input id="<%=id%>" class ="trialDHover" type="submit" value="Delete"><img class="dpComments" src="./imgs/waste.png"><%=id%>
+        </form>
     </div>
     <div class="votePart">
         <div>

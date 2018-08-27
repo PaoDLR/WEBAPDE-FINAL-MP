@@ -51,28 +51,9 @@ function findPost(title, callback){
     });
 }
 
-function findEDPost(username, title, description, content, callback){
-    
-    const findQuery = {title: title, desc: description, content: content}
-    
-    postModel.findOne(findQuery, function(err, post){
-        console.log("Found post to edit");
-        callback(post);
-    })
-    
-}
+module.exports.findPost = findPost;
 
 function editPost(title, description, content, callback){
-    
-    /* 
-    
-    Insert logic here.
-    
-    */
-}
-
-function deletePost(title, description, content, callback){
-    
     /*
     
     Insert logic here.
@@ -80,4 +61,12 @@ function deletePost(title, description, content, callback){
     */
 }
 
-module.exports.findPost = findPost;
+module.exports.editPost = editPost;
+
+function deletePost(id){
+    
+    postModel.deleteOne({ _id: id }, function (err) {
+    });
+}
+
+module.exports.deletePost = deletePost;

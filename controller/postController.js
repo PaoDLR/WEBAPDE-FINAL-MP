@@ -91,15 +91,35 @@ function PostModule(server){
         
     });
     
-    server.get('/editedPost', function(req,resp){
+    server.get('/findPost', function(req,resp){
        var passDataPost
        
-       postModel.findEDPost(req.query.user, req.query.title, req.query.description, req.query.content, function(post){
+       postModel.findPost(req.query.title, function(post){
            passDataPost = post;
            
            resp.redirect('./profile', {postData: passDataPost});
-       })
+       });
        
+    });
+    
+    server.get('/deletePost', function(req, resp){
+        var dataID = req.query._id;
+        var postData;
+        console.log(dataID + " <--- ID of the Post");
+        
+        postModel.findPost(req.query.title, function(data){
+            postData = { data:data };
+            console.log(postData + " <--- Post Data");
+            
+            for(var i = 0; i < postData.data.length; i++){
+                
+                if(postData.data[i]._id == dataID){
+                   postModel.deletePost(dataID);
+                }
+            }
+            
+            resp.redirect('./profile');
+        });
     });
     
 }
