@@ -16,8 +16,9 @@
         </form>
     </div>
     <div class="deletePart">
+        <% console.log(id + " <---- ID of the post")%>
         <form action="deletePost" method="get">
-        <input id="<%=id%>" class ="trialDHover" type="submit" value="Delete"><img class="dpComments" src="./imgs/waste.png"><%=id%>
+        <input name="id" class ="trialDHover" type="submit" value="<%=id%>"><img class="dpComments" src="./imgs/waste.png">
         </form>
     </div>
     <div class="votePart">
