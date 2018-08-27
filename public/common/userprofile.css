@@ -207,6 +207,15 @@
     height: 20px;
 }
 
+.w3-modal-content{
+    width: 5px;
+    height: 500px;
+}
+.w3-container{
+    width: 5px;
+    height: 0px;
+}
+
 .editPart{
     margin-left: 115px;
     margin-top: -20px;
@@ -214,7 +223,7 @@
     font-family: Tahoma;
     font-size: 14px;
     position: relative;
-    width: 45px;
+    width: 60px;
     height: 20px;
 }
 
@@ -225,8 +234,34 @@
     font-family: Tahoma;
     font-size: 14px;
     position: relative;
-    width: 60px;
+    width: 70px;
     height: 20px;
+}
+
+.trialEHover{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    overflow: hidden;
+    outline:none;
+}
+
+.trialDHover{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    overflow: hidden;
+    outline:none;
+}
+
+.trialEHover:hover{
+    background: #5ba5ef;
+    cursor: pointer;
+}
+
+.trialDHover:hover{
+    background: #db1e1e;
+    cursor: pointer;
 }
 
 /*
@@ -235,16 +270,6 @@
     cursor: pointer;
 }
 */
-
-.editPart:hover{
-    background: #5ba5ef;
-    cursor: pointer;
-}
-
-.deletePart:hover{
-    background: #db1e1e;
-    cursor: pointer;
-}
 
 .votePart{
     margin-left: 840px;
@@ -266,6 +291,27 @@
     margin-top:-10px;
 }
 
+.createButton{
+    float: left;
+    font-family: Tahoma;
+    font-size: 15px;
+    margin-top: 2px;
+    margin-right: 0px;
+    border-radius: 5px;
+    width: 100px;
+    background-color: white;
+    border-style: groove;
+}
+
+.w3-modal-content{
+    width: 5px;
+    height: 500px;
+}
+.w3-container{
+    width: 5px;
+    height: 0px;
+}
+
 .voteNumbers{
     margin-top: -38px;
     margin-left: 55px;
@@ -276,7 +322,7 @@
 
 .dateTime{
     margin-left: 236px;
-    margin-top: 11px;
+    margin-top: 9px;
     font-family: Tahoma;
     font-size: 12px;
     position: relative;

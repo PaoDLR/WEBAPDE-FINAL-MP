@@ -26,6 +26,7 @@
                     <% for(var i=0;i<postData.length;i++){ %>
                         <% if(postData[i].user == data.user){%>
                             <%- include('./profilePosts', {
+                                id: postData[i]._id,
                                 title: postData[i].title,
                                 desc: postData[i].desc,
                                 likes: postData[i].likes
