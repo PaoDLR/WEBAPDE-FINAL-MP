@@ -63,6 +63,7 @@
         </div>
         <br>
         <div id="comments" class="border font">
+            <% if(loggedIn != null){ %>
             <div class="myComment">
                 <form action="post" method="get">
                     <textarea name="comment" class="inputComment" cols="30" rows="10" placeholder="Enter comment here"></textarea>
@@ -70,6 +71,7 @@
                     <input name="title" type="submit" value="<%= data.title %>"> <--- press this to submit
                 </form>
             </div>
+            <% } %>
                 
             <% for(var i=0;i<commentData.length;i++){ %>
                 <% if(commentData[i].parentPost == data.title){%>
@@ -82,6 +84,7 @@
                                 </form>
                             </div>
                             <div class ="commentProper"><%= commentData[i].content %> </div>
+                            <% if(loggedIn!= undefined && loggedIn == commentData[i].user){ %>
                             <div class="editBtn" class="replyContainer">
                                 <form type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2"> 
                                     <img src="./imgs/edit.png" class="replyImg font"> Edit
@@ -109,6 +112,7 @@
                                     <img src="./imgs/waste.png" class="replyImg font"> Delete
                                 </form>
                             </div>
+                            <% } %>
                         </div>
                     </div>
                 <% } %>
