@@ -1,7 +1,7 @@
 <html>
 
     <head>
-        <title>AlexRotorReyes' Profile</title>
+        <title><%=data.user%> Profile</title>
         <link rel="stylesheet" href="./common/userprofile.css" />
     </head>
 
@@ -29,6 +29,7 @@
                         <% if(postData[i].user == data.user){%>
                             <%- include('./profilePosts', {
                                 id: postData[i]._id,
+                                user: postData[i].user,
                                 title: postData[i].title,
                                 desc: postData[i].desc,
                                 likes: postData[i].likes

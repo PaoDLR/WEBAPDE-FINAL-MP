@@ -130,13 +130,47 @@ function PostModule(server){
         });
         
         postModel.allPosts(function(list){
-            allPostDataData = list;
+            allPostData = list;
         });
         
         loginModel.findUser(req.session.user, function(list){
            passDataLogin = list;
             console.log(passDataLogin + " <---- loginData ");
-            resp.render('./pages/profile', {data: passDataLogin, postData: passDataPost, commentData: passDataComment, loggedIn: req.session.user});
+            resp.render('./pages/profile', {data: passDataLogin, postData: allPostData, commentData: passDataComment, loggedIn: req.session.user});
+        });
+    });
+    
+    server.get('/editPost', function(req, resp){
+        console.log(req.query.id + " <--- ID of the Post in postController");
+        var passDataPost;
+        var passDataLogin;
+        var passDataComment;
+        var allPostData;
+        
+        postModel.findPostbyID(req.query.id, function(data){
+            passDataPost = data;
+            
+            postModel.editPost(req.query.id, req.query.title, req.query.desc, req.query.content, function(result){
+               if(result){
+                    console.log("Post editted!");    
+                }else    
+                    console.log("Post NOT editted!"); 
+            });   
+            
+        });
+        
+        commentModel.allComments(function(list){
+            passDataComment = list;
+        });
+        
+        postModel.allPosts(function(list){
+            allPostData = list;
+        });
+        
+        loginModel.findUser(req.session.user, function(list){
+           passDataLogin = list;
+            console.log(passDataLogin + " <---- loginData ");
+            resp.render('./pages/profile', {data: passDataLogin, postData: allPostData, commentData: passDataComment, loggedIn: req.session.user});
         });
     });
     
@@ -159,24 +193,43 @@ function PostModule(server){
 
         }); 
     
-    server.get('/upvote', function(req,resp){
-      var passDataLikes;
-        console.log("hellooooooooooooo")
-        postModel.upvotePost(req.query.user, req.query.title, req.query.likes, function(post){
-                passDataLikes = likes;
-                
-                resp.render('.pages/post', {likesData: passDataLikes});
+    server.post('/upvote', function(req,resp){
+        
+        var passDataLogin, passDataComment, passDataPost;
+
+        loginModel.allUsers(function(list){
+            passDataLogin = list;
+        });
+
+        commentModel.allComments(function(list){
+            passDataComment = list;
+        });
+        
+        console.log("upvote------------------");
+        postModel.upvotePost(req.body.title, function(post){
+            passDataPost = post;
+            
+            resp.render('./pages/post', { data: passDataPost, commentData: passDataComment, loginData: passDataLogin, loggedIn: req.session.user });
         });
     });
     
-    server.get('/downvote', function(req,resp){
-      var passDataLikes;
+    server.post('/downvote', function(req,resp){
+        var passDataLogin, passDataComment, passDataPost;
+
+        loginModel.allUsers(function(list){
+            passDataLogin = list;
+        });
+
+        commentModel.allComments(function(list){
+            passDataComment = list;
+        });
         
-        postModel.downvotePost(req.query.user, req.query.title, req.query.likes, function(post){
-                passDataLikes = likes;
-                
-                resp.render('.pages/post', {likesData: passDataLikes});
-             });
+        console.log("downvote------------------");
+        postModel.downvotePost(req.body.title, function(post){
+            passDataPost = post;
+            
+            resp.render('./pages/post', { data: passDataPost, commentData: passDataComment, loginData: passDataLogin, loggedIn: req.session.user });
+        });
     });
 }
 
