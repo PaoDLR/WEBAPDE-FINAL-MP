@@ -23,6 +23,11 @@ function PostModule(server){
         
     });
     
+    server.get('/about', function(req, resp){
+       resp.render('./pages/about');
+    });
+
+    
     server.post('/create-post', function(req, resp){
 
         var passDataLogin, passDataPost;

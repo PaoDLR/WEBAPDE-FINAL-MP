@@ -1,0 +1,19 @@
+.header{
+    margin-left: -8px;
+    margin-right: -8px;
+    margin-top: -8px;
+    position: relative;
+    background-color: #5ba5ef;
+    height: 50px;
+    font-family: Tahoma;
+    color:white;
+}
+
+.headerLogo{
+    width: 40x;
+    height: 40px;
+    border-radius: 5px;
+    float: left;
+    margin-right: 5px;
+    margin-top: 3px;
+}
