@@ -30,7 +30,14 @@ function checkLogin(username, password, callback){
   //in the login function. Access the information like a JSon array.
   loginModel.findOne(searchQuery, function (err, login) {
     if(err) return console.error(err);
-    callback((login != undefined && login._id != null), login.user);
+    var username;
+      
+    if(login != null)
+        username = login.user;
+    else
+        username = undefined;
+      
+    callback((login != undefined && login._id != null), username);
 //    console.log(login + " <--------- Login Data ");
   });
 }

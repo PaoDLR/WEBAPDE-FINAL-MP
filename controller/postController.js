@@ -18,7 +18,7 @@ function PostModule(server){
             passDataLogin = list;
             
             if(passDataLogin != undefined && passDataPost != undefined)
-            resp.render('./pages/index', { postData: passDataPost, loginData: passDataLogin });
+            resp.render('./pages/index', { postData: passDataPost, loginData: passDataLogin, loggedIn: req.session.user });
         });
         
     });
@@ -34,10 +34,10 @@ function PostModule(server){
         postModel.allPosts(function(list){
             passDataPost = list;
             
-            resp.render('./pages/index', { postData: passDataPost, loginData: passDataLogin });
+            resp.render('./pages/index', { postData: passDataPost, loginData: passDataLogin, loggedIn: req.session.user });
         });
         
-        postModel.addPost('AlexRotorReyes', req.body.title, req.body.desc, req.body.content, 0, function(){
+        postModel.addPost(req.session.user, req.body.title, req.body.desc, req.body.content, 0, function(){
             console.log("saved post to database!");
         });
         
@@ -53,7 +53,7 @@ function PostModule(server){
 
         if(req.query.comment != null || req.query.comment != undefined || req.query.comment == ''){
             
-            commentModel.addComment('AlexRotorReyes', req.query.comment, req.query.title, function(){
+            commentModel.addComment(req.session.user, req.query.comment, req.query.title, function(){
                 console.log("saved comment to database!");
             });
             
@@ -66,7 +66,7 @@ function PostModule(server){
         postModel.findPost(req.query.title, function(post){
             passDataPost = post;
             
-            resp.render('./pages/post', { data: passDataPost, commentData: passDataComment, loginData: passDataLogin });
+            resp.render('./pages/post', { data: passDataPost, commentData: passDataComment, loginData: passDataLogin, loggedIn: req.session.user });
         });    
     
     });
@@ -86,7 +86,7 @@ function PostModule(server){
         loginModel.findUser(req.query.user, function(user){
             passDataLogin = user;
             
-            resp.render('./pages/profile', { data: passDataLogin, commentData: passDataComment, postData: passDataPost });
+            resp.render('./pages/profile', { data: passDataLogin, commentData: passDataComment, postData: passDataPost, loggedIn: req.session.user });
         });
         
     });

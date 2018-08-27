@@ -17,7 +17,11 @@
     </head>
     
     <body class="background">
-        <% include ./header.ejs %>
+        
+        <%- include('./header.ejs', {
+            currentUser: loggedIn
+        }); %>
+        
         <div class="container">
             <% for(var i=0;i<postData.length;i++){ %>
                     <%- include('./indexPosts', {
