@@ -44,10 +44,16 @@
             <div class="vote">
                 <div>
                     <div>
-                    <form action="upvote" class="voteBtn" method="post"><img src="./imgs/upvote.png" class="voteImg"></form>
+                        <form action="upvote" class="voteBtn" method="post">
+                            <input type="hidden" name="title" value="<%= data.title %>">
+                            <button type="submit"><img src="./imgs/upvote.png" class="voteImg"></button>
+                        </form>
                     </div>
                     <div>    
-                    <form action="downvote" class="voteBtn" method="post"><img src ="./imgs/downvote.png" class="voteImg"></form>
+                        <form action="downvote" class="voteBtn" method="post">
+                            <input type="hidden" name="title" value="<%= data.title %>">
+                            <button type="submit"><img src ="./imgs/downvote.png" class="voteImg"></button>
+                        </form>
                     </div>
                 </div>    
                 <span name="likes" class="voteCount font"><%= data.likes %></span>
@@ -63,6 +69,7 @@
         </div>
         <br>
         <div id="comments" class="border font">
+            <% if(loggedIn != null){ %>
             <div class="myComment">
                 <form action="post" method="get">
                     <textarea name="comment" class="inputComment" cols="30" rows="10" placeholder="Enter comment here"></textarea>
@@ -70,6 +77,7 @@
                     <input name="title" type="submit" value="<%= data.title %>"> <--- press this to submit
                 </form>
             </div>
+            <% } %>
                 
             <% for(var i=0;i<commentData.length;i++){ %>
                 <% if(commentData[i].parentPost == data.title){%>
@@ -82,6 +90,7 @@
                                 </form>
                             </div>
                             <div class ="commentProper"><%= commentData[i].content %> </div>
+                            <% if(loggedIn!= undefined && loggedIn == commentData[i].user){ %>
                             <div class="editBtn" class="replyContainer">
                                 <form type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2"> 
                                     <img src="./imgs/edit.png" class="replyImg font"> Edit
@@ -109,6 +118,7 @@
                                     <img src="./imgs/waste.png" class="replyImg font"> Delete
                                 </form>
                             </div>
+                            <% } %>
                         </div>
                     </div>
                 <% } %>
