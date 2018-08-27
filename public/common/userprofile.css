@@ -386,7 +386,7 @@
 
 .dateTime{
     margin-left: 236px;
-    margin-top: 9px;
+    margin-top: -19px;
     font-family: Tahoma;
     font-size: 12px;
     position: relative;
@@ -402,7 +402,6 @@
 
 .actualComment{
     margin-left: 30px;
-    margin-top: 5px;
     font-family: Tahoma;
     position: relative;
     color: #515151;

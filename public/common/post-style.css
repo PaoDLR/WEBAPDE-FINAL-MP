@@ -135,6 +135,14 @@
     border: none;
 }
 
+.deleteBtn{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    overflow: hidden;
+    outline:none;
+}
+
 .voteBtn:hover{
     border: solid .5px;
     border-color: #5ba5ef;
@@ -303,8 +311,16 @@
     color: white;
 }
 
+.btnDel{
+    border: solid;
+    border-width: thin;
+}
+
 .btnDel:hover{
     background-color: red;
+    cursor: pointer;
+    border: solid;
+    border-width: thin;
 }
 
 .modalTextInput{
@@ -331,6 +347,5 @@
 }
 
 .editBtn{
-    border: solid;
     width: 200px;
 }
