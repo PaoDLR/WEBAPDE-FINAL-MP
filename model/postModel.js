@@ -53,12 +53,24 @@ function findPost(title, callback){
 
 module.exports.findPost = findPost;
 
-function editPost(title, description, content, callback){
-    /*
+function editPost(id, title, description, content, callback){
+    const findQuery = {_id: id};
     
-    Insert logic here.
+    var eTitle = title;
+    var eDesc = description;
+    var eContent = content;
     
-    */
+    postModel.findOne(findQuery, function(err, post){
+       console.log("found post to be edited!");
+        post.title = eTitle;
+        post.desc = eDesc;
+        post.content = eContent;
+        
+        post.save(function (err, result){
+            if (err) return console.error(err);
+            callback(result);
+        });
+    });
 }
 
 module.exports.editPost = editPost;

@@ -130,13 +130,47 @@ function PostModule(server){
         });
         
         postModel.allPosts(function(list){
-            allPostDataData = list;
+            allPostData = list;
         });
         
         loginModel.findUser(req.session.user, function(list){
            passDataLogin = list;
             console.log(passDataLogin + " <---- loginData ");
-            resp.render('./pages/profile', {data: passDataLogin, postData: passDataPost, commentData: passDataComment, loggedIn: req.session.user});
+            resp.render('./pages/profile', {data: passDataLogin, postData: allPostData, commentData: passDataComment, loggedIn: req.session.user});
+        });
+    });
+    
+    server.get('/editPost', function(req, resp){
+        console.log(req.query.id + " <--- ID of the Post in postController");
+        var passDataPost;
+        var passDataLogin;
+        var passDataComment;
+        var allPostData;
+        
+        postModel.findPostbyID(req.query.id, function(data){
+            passDataPost = data;
+            
+            postModel.editPost(req.query.id, req.query.title, req.query.desc, req.query.content, function(result){
+               if(result){
+                    console.log("Post editted!");    
+                }else    
+                    console.log("Post NOT editted!"); 
+            });   
+            
+        });
+        
+        commentModel.allComments(function(list){
+            passDataComment = list;
+        });
+        
+        postModel.allPosts(function(list){
+            allPostData = list;
+        });
+        
+        loginModel.findUser(req.session.user, function(list){
+           passDataLogin = list;
+            console.log(passDataLogin + " <---- loginData ");
+            resp.render('./pages/profile', {data: passDataLogin, postData: allPostData, commentData: passDataComment, loggedIn: req.session.user});
         });
     });
     

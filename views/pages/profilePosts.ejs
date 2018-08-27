@@ -11,14 +11,39 @@
 <!--        <img class="dpComments" src="comment.png"> 3 Comments-->
     </div>
     <div class="editPart">
+<!--
         <form action="editPost" method="get">
          <input class ="trialEHover" type="submit" value="Edit"><img class="dpComments" src="./imgs/edit.png">
         </form>
+-->
+        <button onclick="document.getElementById('id01').style.display='block'" class="trialEHover">Edit <img class="dpComments" src="./imgs/edit.png"></button>
+        <div id="id01" class="w3-modal">
+            <div class="w3-modal-content">
+                <div class="w3-container">
+                    <form action="editPost" method="get">
+                        <div><input name="title" class="createTitle" type="text" placeholder="Title"/>
+                            <span onclick="document.getElementById('id01').style.display='none'" class="closeButton">&times;</span>
+                        </div>
+                        <div>
+                            <input name="desc" class="createDesc" type="text" placeholder="Description"/>
+                        </div>
+                        <div>
+                            <input name="content" class="createBody" type="text" placeholder="What's happening today?"/>
+                        </div>
+                        <div>
+                        <input type="hidden" name="id" value="<%=id%>">
+                        <button id="createPublish" onclick="document.getElementById('id01').style.display='none'" class="buttonFinish" type="submit">Finish</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="deletePart">
         <% console.log(id + " <---- ID of the post")%>
         <form action="deletePost" method="get">
-        <input name="id" class ="trialDHover" type="submit" value="<%=id%>"><img class="dpComments" src="./imgs/waste.png">
+        <input type="hidden" name="id" value="<%=id%>">
+            <button class ="trialDHover" type="submit">Delete <img class="dpComments" src="./imgs/waste.png"></button>
         </form>
     </div>
     <div class="votePart">
