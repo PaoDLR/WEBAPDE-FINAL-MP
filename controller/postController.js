@@ -92,36 +92,77 @@ function PostModule(server){
     });
     
     server.get('/findPost', function(req,resp){
-       var passDataPost
+        
+       var passDataPost, passDataComment, passDataLogin;
+       
+        loginModel.findUser(req.query.user, function(user){
+            passDataLogin = user;
+        });
+        
+       commentModel.allComments(function(list){
+            passDataComment = list;
+        });
        
        postModel.findPost(req.query.title, function(post){
            passDataPost = post;
            
-           resp.redirect('./profile', {postData: passDataPost});
+           resp.redirect('./profile', {postData: passDataPost, loginData: passDataLogin, commentData: passDataComment});
        });
        
     });
     
     server.get('/deletePost', function(req, resp){
-        var dataID = req.query._id;
-        var postData;
-        console.log(dataID + " <--- ID of the Post");
+        console.log(req.query.id + " <--- ID of the Post in postController");
+        var passDataPost;
+        var passDataLogin;
+        var passDataComment;
+        var allPostData;
         
-        postModel.findPost(req.query.title, function(data){
-            postData = { data:data };
-            console.log(postData + " <--- Post Data");
+        postModel.findPostbyID(req.query.id, function(data){
+            passDataPost = data;
+            console.log(passDataPost + " <--- Post Data");
             
-            for(var i = 0; i < postData.data.length; i++){
+            for(var i = 0; i < passDataPost.data.length; i++){
                 
-                if(postData.data[i]._id == dataID){
+                if(passDataPost.data[i]._id == dataID){
                    postModel.deletePost(dataID);
                 }
             }
-            
-            resp.redirect('./profile');
+        });
+        
+        commentModel.allComments(function(list){
+            passDataComment = list;
+        });
+        
+        postModel.allPosts(function(list){
+            allPostDataData = list;
+        });
+        
+        loginModel.findUser("AlexRotorReyes", function(list){
+           passDataLogin = list;
+            console.log(passDataLogin + " <---- loginData ");
+            resp.render('./pages/profile', {data: passDataLogin, postData: passDataPost, commentData: passDataComment});
         });
     });
     
+    server.get('/findPostbyID', function(req,resp){
+           var passDataPost, passDataComment, passDataLogin;
+
+            loginModel.findUser(req.query.user, function(user){
+                passDataLogin = user;
+             });
+        
+             commentModel.allComments(function(list){
+                passDataComment = list;
+            });
+        
+           postModel.findPost(req.query._id, function(post){
+               passDataPost = post;
+
+               resp.redirect('./profile', {postData: passDataPost, loginData: passDataLogin, commentData: passDataComment});
+           });
+
+        });   
 }
 
 module.exports.Activate = PostModule;

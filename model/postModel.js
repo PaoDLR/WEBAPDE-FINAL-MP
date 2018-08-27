@@ -70,3 +70,14 @@ function deletePost(id){
 }
 
 module.exports.deletePost = deletePost;
+
+function findPostbyID(id, callback){
+    const findQuery = { _id: id }
+        console.log(id + " <---- found post by ID in postModel");
+    postModel.findOne(findQuery, function (err, post) {
+        console.log(post + " <---- found post by ID");
+        callback(post);
+    });
+}
+
+module.exports.findPostbyID = findPostbyID;
