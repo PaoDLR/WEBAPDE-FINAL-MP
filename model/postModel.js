@@ -81,3 +81,33 @@ function findPostbyID(id, callback){
 }
 
 module.exports.findPostbyID = findPostbyID;
+
+function upvotePost(title, likes, callback)
+{
+    const upvoteQuery = { title: title, likes: likes }
+    
+    
+    postModel.findOne(upvoteQuery, function(err, post){
+//        upvoteQuery.likes.aggregate({$add:likes, 1});
+        upvoteQuery.likes += 1;
+        if(err) return console.error(err);
+        callback();
+    })
+}
+
+module.exports.upvotePost = upvotePost;
+
+function downvotePost(title, likes, callback)
+{
+    const downvoteQuery = { title: title, likes: likes }
+    console.log("DOWN DOWN DOWN!!!!!!!!!!!!!!!!!!!!!")
+    
+    postModel.findOne(downvoteQuery, function(err, post){
+        while(likes >= 0)
+            downvoteQuery.likes -= 1;
+        if(err) return console.error(err);
+        callback();
+    })
+}
+
+module.exports.downvotePost = downvotePost;
