@@ -44,10 +44,16 @@
             <div class="vote">
                 <div>
                     <div>
-                    <form action="upvote" class="voteBtn" method="post"><img src="./imgs/upvote.png" class="voteImg"></form>
+                        <form action="upvote" class="voteBtn" method="post">
+                            <input type="hidden" name="title" value="<%= data.title %>">
+                            <button type="submit"><img src="./imgs/upvote.png" class="voteImg"></button>
+                        </form>
                     </div>
                     <div>    
-                    <form action="downvote" class="voteBtn" method="post"><img src ="./imgs/downvote.png" class="voteImg"></form>
+                        <form action="downvote" class="voteBtn" method="post">
+                            <input type="hidden" name="title" value="<%= data.title %>">
+                            <button type="submit"><img src ="./imgs/downvote.png" class="voteImg"></button>
+                        </form>
                     </div>
                 </div>    
                 <span name="likes" class="voteCount font"><%= data.likes %></span>

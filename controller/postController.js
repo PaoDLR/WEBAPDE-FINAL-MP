@@ -159,24 +159,43 @@ function PostModule(server){
 
         }); 
     
-    server.get('/upvote', function(req,resp){
-      var passDataLikes;
-        console.log("hellooooooooooooo")
-        postModel.upvotePost(req.query.user, req.query.title, req.query.likes, function(post){
-                passDataLikes = likes;
-                
-                resp.render('.pages/post', {likesData: passDataLikes});
+    server.post('/upvote', function(req,resp){
+        
+        var passDataLogin, passDataComment, passDataPost;
+
+        loginModel.allUsers(function(list){
+            passDataLogin = list;
+        });
+
+        commentModel.allComments(function(list){
+            passDataComment = list;
+        });
+        
+        console.log("upvote------------------");
+        postModel.upvotePost(req.body.title, function(post){
+            passDataPost = post;
+            
+            resp.render('./pages/post', { data: passDataPost, commentData: passDataComment, loginData: passDataLogin, loggedIn: req.session.user });
         });
     });
     
-    server.get('/downvote', function(req,resp){
-      var passDataLikes;
+    server.post('/downvote', function(req,resp){
+        var passDataLogin, passDataComment, passDataPost;
+
+        loginModel.allUsers(function(list){
+            passDataLogin = list;
+        });
+
+        commentModel.allComments(function(list){
+            passDataComment = list;
+        });
         
-        postModel.downvotePost(req.query.user, req.query.title, req.query.likes, function(post){
-                passDataLikes = likes;
-                
-                resp.render('.pages/post', {likesData: passDataLikes});
-             });
+        console.log("downvote------------------");
+        postModel.downvotePost(req.body.title, function(post){
+            passDataPost = post;
+            
+            resp.render('./pages/post', { data: passDataPost, commentData: passDataComment, loginData: passDataLogin, loggedIn: req.session.user });
+        });
     });
 }
 

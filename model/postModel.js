@@ -82,32 +82,30 @@ function findPostbyID(id, callback){
 
 module.exports.findPostbyID = findPostbyID;
 
-function upvotePost(title, likes, callback)
-{
-    const upvoteQuery = { title: title, likes: likes }
-    
-    
-    postModel.findOne(upvoteQuery, function(err, post){
-//        upvoteQuery.likes.aggregate({$add:likes, 1});
-        upvoteQuery.likes += 1;
-        if(err) return console.error(err);
-        callback();
-    })
+function upvotePost(title, callback){
+    const findQuery = { title: title }
+        
+    postModel.findOne(findQuery, function (err, post) {
+        post.likes += 1;
+        post.save(function(err, result){
+            if (err) return console.error(err);
+        });
+        callback(post);
+    });
 }
 
 module.exports.upvotePost = upvotePost;
 
-function downvotePost(title, likes, callback)
-{
-    const downvoteQuery = { title: title, likes: likes }
-    console.log("DOWN DOWN DOWN!!!!!!!!!!!!!!!!!!!!!")
-    
-    postModel.findOne(downvoteQuery, function(err, post){
-        while(likes >= 0)
-            downvoteQuery.likes -= 1;
-        if(err) return console.error(err);
-        callback();
-    })
+function downvotePost(title, callback){
+    const findQuery = { title: title }
+        
+    postModel.findOne(findQuery, function (err, post) {
+        post.likes -= 1;
+        post.save(function(err, result){
+            if (err) return console.error(err);
+        });
+        callback(post);
+    });
 }
 
 module.exports.downvotePost = downvotePost;
