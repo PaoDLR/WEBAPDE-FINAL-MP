@@ -18,8 +18,10 @@
         <% } %>
     <% } %>
     
-    <body class="background">      
-        <% include ./header.ejs %>
+    <body class="background">
+        <%- include('./header.ejs', {
+            currentUser: loggedIn
+        }); %>
         <br>
         <% console.log("hereeee " + commentData.length) %>
         <div id="info" class="border">

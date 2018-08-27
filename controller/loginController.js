@@ -25,7 +25,7 @@ function LoginModule(server){
 
             postModel.allPosts(function(list){
                 passDataPost = list;
-                resp.render('./pages/index', { postData: passDataPost, loginData: passDataLogin });
+                resp.render('./pages/index', { postData: passDataPost, loginData: passDataLogin, loggedIn: req.session.user });
             });
        });
     });
@@ -50,7 +50,7 @@ function LoginModule(server){
 
                 postModel.allPosts(function(list){
                     passDataPost = list;
-                    resp.render('./pages/index', { postData: passDataPost, loginData: passDataLogin });
+                    resp.render('./pages/index', { postData: passDataPost, loginData: passDataLogin, loggedIn: req.session.user });
                 });
           }
           else{ 

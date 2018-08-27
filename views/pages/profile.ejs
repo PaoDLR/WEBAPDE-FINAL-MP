@@ -5,8 +5,10 @@
         <link rel="stylesheet" href="./common/userprofile.css" />
     </head>
 
-    <body class="background"> 
-        <% include ./header.ejs %>
+    <body class="background">
+        <%- include('./header.ejs', {
+            currentUser: loggedIn
+        }); %>
         
             <div class="displayUserwFlex">
                 <div class="displayUser">
