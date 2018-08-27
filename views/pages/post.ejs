@@ -73,8 +73,8 @@
             <div class="myComment">
                 <form action="post" method="get">
                     <textarea name="comment" class="inputComment" cols="30" rows="10" placeholder="Enter comment here"></textarea>
-                    
-                    <input name="title" type="submit" value="<%= data.title %>"> <--- press this to submit
+                    <input name="title" type="hidden" value="<%= data.title %>">
+                    <input type="submit" value="Add Comment">
                 </form>
             </div>
             <% } %>
