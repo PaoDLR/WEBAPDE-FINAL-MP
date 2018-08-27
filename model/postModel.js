@@ -121,3 +121,21 @@ function downvotePost(title, callback){
 }
 
 module.exports.downvotePost = downvotePost;
+
+function searchablePost(array, callback){
+    
+    postModel.find({},function(err, post){
+        if(err) return console.error(err);
+        
+        console.log(post + " <---- all posts");
+        console.log(array + " <--- content of array")
+        
+        for(var i = 0; i < post.length; i++){
+            if(post[i].title.includes(array[i])){
+                callback(array[i].push());
+            }
+        }
+    });
+}
+
+module.exports.searchablePost = searchablePost;

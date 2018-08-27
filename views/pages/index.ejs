@@ -24,12 +24,14 @@
         
         <div class="container">
             <% for(var i=0;i<postData.length;i++){ %>
+                <%if(postData[i] != undefined){%>
                     <%- include('./indexPosts', {
                         title: postData[i].title,
                         desc: postData[i].desc,
                         likes: postData[i].likes,
                         user: postData[i].user
                     }); %>
+                <%}%>
             <% } %>
 
         </div>

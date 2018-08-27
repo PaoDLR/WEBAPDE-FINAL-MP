@@ -19,7 +19,7 @@
 .header{
     margin-left: -8px;
     margin-right: -8px;
-    margin-top: -8px;
+    margin-top: -16px;
     position: relative;
     background-color: #5ba5ef;
     height: 50px;
@@ -133,6 +133,14 @@
 .voteBtn{
     background: none;
     border: none;
+}
+
+.deleteBtn{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    overflow: hidden;
+    outline:none;
 }
 
 .voteBtn:hover{
@@ -303,8 +311,16 @@
     color: white;
 }
 
+.btnDel{
+    border: solid;
+    border-width: thin;
+}
+
 .btnDel:hover{
     background-color: red;
+    cursor: pointer;
+    border: solid;
+    border-width: thin;
 }
 
 .modalTextInput{
@@ -331,6 +347,5 @@
 }
 
 .editBtn{
-    border: solid;
     width: 200px;
 }

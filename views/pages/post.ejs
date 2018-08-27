@@ -46,13 +46,13 @@
                     <div>
                         <form action="upvote" class="voteBtn" method="post">
                             <input type="hidden" name="title" value="<%= data.title %>">
-                            <button type="submit"><img src="./imgs/upvote.png" class="voteImg"></button>
+                            <button class="voteBtn" type="submit"><img src="./imgs/upvote.png" class="voteImg"></button>
                         </form>
                     </div>
                     <div>    
                         <form action="downvote" class="voteBtn" method="post">
                             <input type="hidden" name="title" value="<%= data.title %>">
-                            <button type="submit"><img src ="./imgs/downvote.png" class="voteImg"></button>
+                            <button class="voteBtn"type="submit"><img src ="./imgs/downvote.png" class="voteImg"></button>
                         </form>
                     </div>
                 </div>    
@@ -73,8 +73,8 @@
             <div class="myComment">
                 <form action="post" method="get">
                     <textarea name="comment" class="inputComment" cols="30" rows="10" placeholder="Enter comment here"></textarea>
-                    
-                    <input name="title" type="submit" value="<%= data.title %>"> <--- press this to submit
+                    <input name="title" type="hidden" value="<%= data.title %>">
+                    <input type="submit" value="Add Comment">
                 </form>
             </div>
             <% } %>
@@ -118,7 +118,7 @@
                                     <% console.log(commentData[i].id + " <----- commentData.id") %>
                                     <input type="hidden" name="id" value="<%= commentData[i].id %>">
                                     <img src="./imgs/waste.png" class="replyImg font">
-                                    <input type="submit" value="Delete">
+                                    <input class="deleteBtn" type="submit" value="Delete">
                                 </form>
                             </div>
                             <% } %>
