@@ -120,14 +120,9 @@ function PostModule(server){
         
         postModel.findPostbyID(req.query.id, function(data){
             passDataPost = data;
-            console.log(passDataPost + " <--- Post Data");
             
-            for(var i = 0; i < passDataPost.data.length; i++){
-                
-                if(passDataPost.data[i]._id == dataID){
-                   postModel.deletePost(dataID);
-                }
-            }
+            postModel.deletePost(req.query.id);
+            console.log("Post deleted!");
         });
         
         commentModel.allComments(function(list){
@@ -138,10 +133,10 @@ function PostModule(server){
             allPostDataData = list;
         });
         
-        loginModel.findUser("AlexRotorReyes", function(list){
+        loginModel.findUser(req.session.user, function(list){
            passDataLogin = list;
             console.log(passDataLogin + " <---- loginData ");
-            resp.render('./pages/profile', {data: passDataLogin, postData: passDataPost, commentData: passDataComment});
+            resp.render('./pages/profile', {data: passDataLogin, postData: passDataPost, commentData: passDataComment, loggedIn: req.session.user});
         });
     });
     
