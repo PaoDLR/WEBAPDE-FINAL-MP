@@ -3,7 +3,9 @@
     <% if(currentUser != undefined) {%>
     <a href="profile?user=<%= currentUser %>">My Profile</a>
     <% } %>
-    <input name="search" type="text" placeholder="Search"/>
+    <form action="searchPosts" method="get">
+        <input name="search" type="text" placeholder="Search"/>
+    </form>
     <a id="logout" href="/signin">
         <% if(currentUser != undefined) {%>
         Log Out

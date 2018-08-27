@@ -140,6 +140,32 @@ function PostModule(server){
         });
     });
     
+    server.get('/searchPosts', function(req, resp){
+        console.log(req.query.search); 
+        
+        var passDataPost, passDataLogin;
+        var foundPost = new Array();
+        var searchedPost;
+        
+        postModel.allPosts(function(list){
+            passDataPost = list;
+            console.log(passDataPost + " <---- passDataPost");
+            
+            for(var i = 0; i < passDataPost.length; i++){
+                console.log(passDataPost[i].title + " <--- title of data");
+                if(passDataPost[i].title.includes(req.query.search)){
+                       foundPost[i] = passDataPost[i];
+                        console.log(passDataPost[i] + " <--- whatever")
+                }
+            }
+            resp.render('./pages/index', { postData: foundPost, loginData: passDataLogin, loggedIn: req.session.user });
+        });
+        
+        loginModel.allUsers(function(list){
+            passDataLogin = list;
+        });
+    });
+    
     server.get('/editPost', function(req, resp){
         console.log(req.query.id + " <--- ID of the Post in postController");
         var passDataPost;
