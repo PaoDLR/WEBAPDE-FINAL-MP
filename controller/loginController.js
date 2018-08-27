@@ -5,6 +5,7 @@ function LoginModule(server){
 
     //Leads you to the sign-in page
     server.get('/signin', function(req, resp){
+       req.session.user = undefined;
        resp.render('./pages/signin');
     });
 
@@ -12,24 +13,33 @@ function LoginModule(server){
      server.post('/signup', function(req, resp){    
          
        loginModel.addLogin(req.body.user, req.body.pass, req.body.desc, function(){
-          var passDataLogin, passDataPost;
+            req.session.user = req.body.user;
 
-                loginModel.allUsers(function(list){
-                    passDataLogin = list;
-                });
+            console.log(req.session.user + "test for session-------------------------");
+           
+            var passDataLogin, passDataPost;
 
-                postModel.allPosts(function(list){
-                    passDataPost = list;
-                    resp.render('./pages/index', { postData: passDataPost, loginData: passDataLogin });
-                });
+            loginModel.allUsers(function(list){
+                passDataLogin = list;
+            });
+
+            postModel.allPosts(function(list){
+                passDataPost = list;
+                resp.render('./pages/index', { postData: passDataPost, loginData: passDataLogin });
+            });
        });
     });
 
     //Logging in to an account
     server.post('/login', function(req, resp){
         
-        loginModel.checkLogin(req.body.user, req.body.pass, function(result){
-          
+        loginModel.checkLogin(req.body.user, req.body.pass, function(result, session){
+           
+            req.session.user = session;
+
+            console.log(req.session.user + "test for session-------------------------");
+
+            
           if(result){
               
               var passDataLogin, passDataPost;
@@ -43,7 +53,7 @@ function LoginModule(server){
                     resp.render('./pages/index', { postData: passDataPost, loginData: passDataLogin });
                 });
           }
-          else{
+          else{ 
               //This should go back to sign-in cause user failed to login successfully.
               resp.redirect('./signin');
           }

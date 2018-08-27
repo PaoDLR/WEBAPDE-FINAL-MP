@@ -8,6 +8,8 @@ function PostModule(server){
       
         var passDataLogin, passDataPost;
         
+        console.log(req.session.user +"this is the session.user in post----------------------------");
+        
         postModel.allPosts(function(list){
             passDataPost = list;
         });
